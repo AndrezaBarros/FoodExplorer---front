@@ -12,5 +12,4 @@ export const Container = styled.button`
     font-family: "Poppins", serif;
     font-size: 1.4rem;
     color: ${({theme}) => theme.COLORS.LIGHT_100};
-
 `;

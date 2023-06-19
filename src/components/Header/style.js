@@ -8,7 +8,7 @@ export const Container = styled.div`
 
     padding: 5.6rem 2.8rem 2.4rem;
 
-    > main {
+    #Home {
         height: 3.4rem;
 
         display: flex;
@@ -29,6 +29,20 @@ export const Container = styled.div`
                 font-weight: bold;
                 font-size: 2.1rem;
             }
+        }
+    }
+
+    #Menu {
+        width: 100%;
+
+        display: flex;
+        gap: 1.6rem;
+        align-items: center;
+
+        > h1 {
+            font-family: "Roboto", sans-serif;
+            font-size: 2.1rem;
+            font-weight: 400;
         }
     }
 `;
