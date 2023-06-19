@@ -28,7 +28,6 @@ export const Container = styled.div`
         }
     }
 
-    
     > span {
         font-family: "DM Sans", serif;
         font-size: 1.2rem; 

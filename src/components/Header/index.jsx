@@ -2,8 +2,8 @@ import { Container, Order } from "./style";
 import { HiOutlineMenu } from "react-icons/hi";
 
 import { ButtonText } from "../ButtonText";
-import PolygonLogo from "../../assets/Polygon 2.svg";
-import Receipt from "../../assets/Receipt.svg";
+import PolygonLogo from "../../assets/svg/Polygon 2.svg";
+import Receipt from "../../assets/svg/Receipt.svg";
 
 export function Header() {
   return (

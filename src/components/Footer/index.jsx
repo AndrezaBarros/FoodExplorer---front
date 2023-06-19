@@ -1,5 +1,5 @@
 import {Container} from "./style";
-import PolygonLogo from "../../assets/Polygon 1.svg";
+import PolygonLogo from "../../assets/svg/Polygon 1.svg";
 
 export function Footer() {
     return (
