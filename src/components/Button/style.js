@@ -6,6 +6,8 @@ export const Container = styled.button`
 
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 
     border-radius: 0.5rem;
     border: none;
@@ -20,5 +22,8 @@ export const Container = styled.button`
     line-height: 2.4rem;
     text-align: center;
 
-
+    img {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
 `;

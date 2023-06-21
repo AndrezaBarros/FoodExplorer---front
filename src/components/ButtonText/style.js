@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-    height: 2.4rem;
-
     display: flex;
     align-items: center;
 
@@ -10,6 +8,6 @@ export const Container = styled.button`
     border: none;
 
     font-family: "Poppins", serif;
-    font-size: 1.4rem;
+    font-size: 2.4rem;
     color: ${({theme}) => theme.COLORS.LIGHT_100};
 `;

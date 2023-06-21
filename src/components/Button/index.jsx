@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Container } from "./style";
 
-export function Button({title, icon: Icon, ...rest}) {
+export function Button({title, img, ...rest}) {
     return (
         <Container
             type="button"
             {...rest}
         >
-           {Icon && <Icon size={20}/>}
+           {img && <img src={img}/>}
            {title}
         </Container>
     )

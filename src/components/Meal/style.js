@@ -46,26 +46,6 @@ export const Container = styled.div`
         text-align: center;
     }
 
-    #Counter {
-        width: 10rem;
-        height: 3.2rem;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        > button {
-            background: transparent;
-            border: none;
-        }
-
-        > span {
-            font-family: "Roboto", sans-serif;
-            font-weight: 400;
-            font-size: 1.6rem;
-        }
-    }
-
     #Button {
         padding: 5px 0 4px 0;
     }
