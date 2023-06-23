@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100vw;
+    height: 100vh;
 `;
 
 export const Main = styled.div`
@@ -13,7 +14,7 @@ export const Main = styled.div`
     flex-direction: column;
     gap: 2.4rem;
 
-    overflow-y: auto;
+    overflow-y: scroll;
 
     #ButtonText {
         img {

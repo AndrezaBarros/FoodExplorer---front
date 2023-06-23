@@ -15,7 +15,7 @@ import { Input } from "../../components/Input";
 export function EditMeal() {
   return (
     <Container>
-      <Header id="Header"/>
+      <Header id="Header" mode={true}/>
       <Main>
         <ButtonText title="voltar" img={CaretLeft} id="ButtonText" />
         <h1>Novo prato</h1>

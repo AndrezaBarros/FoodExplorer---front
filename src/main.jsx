@@ -5,13 +5,13 @@ import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import GlobalStyles from "./styles/global";
 
-import { Favorites } from "./pages/Favorites";
+import { DetailsMeal } from "./pages/DetailsMeal";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles/>
-        <Favorites/>
+        <DetailsMeal/>
     </ThemeProvider>
   </React.StrictMode>
 );
