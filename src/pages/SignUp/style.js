@@ -12,22 +12,27 @@ width: 100vw;
     gap: 3.2rem;
 
     #logo {
+        width: 100%;
         display: flex;
         align-items: flex-start;
         gap: 1.1rem;
 
         margin: 15.8rem 2rem 4.1rem 0;
 
-        h1 {
+        > h1 {
             font-family: "Roboto", sans-serif;
             font-size: 3.7rem;
             font-weight: 700;
         }
 
-        img {
+        > img {
             width: 4.3rem;
             height: 4.3rem;
         }
+    }
+
+    #ButtonText {
+        font-size: 1.4rem;
     }
 `;
 
