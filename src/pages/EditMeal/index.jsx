@@ -17,7 +17,7 @@ export function EditMeal() {
     <Container>
       <Header id="Header" mode={true}/>
       <Main>
-        <ButtonText title="voltar" img={CaretLeft} id="ButtonText" />
+        <ButtonText title="voltar" img={CaretLeft} id="ButtonText" to="/"/>
         <h1>Novo prato</h1>
         <form>
           <div>

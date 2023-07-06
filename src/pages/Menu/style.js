@@ -16,18 +16,11 @@ export const Container = styled.div`
         section {
             margin-top: 3.6rem;
 
-            div {
+            #ButtonText {
                 padding: 1rem;
-                border-bottom: 0.1rem solid ${({theme}) => theme.COLORS.DARK_1000};
-
-                > a {
-                font-family: "Poppins", sans-serif;
-                font-size: 2.4rem;
-                color: ${({ theme }) => theme.COLORS.LIGHT_300};
-
-                text-decoration: none;
+                border-bottom: 0.1rem solid ${({ theme }) => theme.COLORS.DARK_1000};
             }
-            }
+
         }
     }
 `;

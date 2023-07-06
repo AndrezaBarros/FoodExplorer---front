@@ -12,7 +12,7 @@ export function Header({ mode }) {
     <Container>
       {mode ? (
         <main id="Home">
-          <ButtonText img={Menu} />
+          <ButtonText img={Menu} to="/Menu"/>
 
           <section id="logo">
             <img src={PolygonLogo} alt="logo" />
@@ -29,7 +29,7 @@ export function Header({ mode }) {
         </main>
       ) : (
         <main id="Menu">
-          <ButtonText img={Close} />
+          <ButtonText img={Close} to="/"/>
           <h1>Menu</h1>
         </main>
       )}

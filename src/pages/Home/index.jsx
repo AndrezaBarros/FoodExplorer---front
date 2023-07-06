@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { Container, Main } from "./style";
 
 import { Header } from "../../components/Header";
