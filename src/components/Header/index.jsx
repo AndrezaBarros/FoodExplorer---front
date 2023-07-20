@@ -7,29 +7,34 @@ import Receipt from "../../assets/svg/Receipt.svg";
 import Menu from "../../assets/svg/Menu.svg";
 import Close from "../../assets/svg/Close.svg";
 
-export function Header({ mode }) {
+export function Header({ mode, userType }) {
   return (
     <Container>
       {mode ? (
         <main id="Home">
-          <ButtonText img={Menu} to="/Menu"/>
+          <ButtonText img={Menu} to="/Menu" />
 
           <section id="logo">
             <img src={PolygonLogo} alt="logo" />
             <span>food explorer</span>
+            {userType == "Client" ? null : <span id="Admin">admin</span>}
           </section>
 
-          <Order>
-            <img src={Receipt} alt="receipt" />
-            <label>
-              <button>0</button>
-              <input id="order" type="file" />
-            </label>
-          </Order>
+          {userType == "Client" ? (
+            <Order>
+              <img src={Receipt} alt="receipt" />
+              <label>
+                <button>0</button>
+                <input id="order" type="file" />
+              </label>
+            </Order>
+          ) : (
+            <span></span>
+          )}
         </main>
       ) : (
         <main id="Menu">
-          <ButtonText img={Close} to="/"/>
+          <ButtonText img={Close} to="/" />
           <h1>Menu</h1>
         </main>
       )}

@@ -48,7 +48,7 @@ export const Main = styled.div`
             font-family: "Poppins", sans-serif;
             font-weight: 500;
             font-size: 1.7rem;
-            color: ${({theme}) => theme.COLORS.LIGHT_300};
+            color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
             line-height: 2.5rem;
         }
@@ -59,12 +59,71 @@ export const Main = styled.div`
 
             font-family: "Poppins", sans-serif;
             font-size: 1.1rem;
-            color: ${({theme}) => theme.COLORS.LIGHT_300};
+            color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
             line-height: 1.6rem;
         }
     }
     
+    #Meal {
+        width: 21.0rem;
+        height: 29.2rem;
+
+        padding: 2.4rem;
+        position: relative;
+        border-radius: 0.8rem;
+
+        background-color: ${({ theme }) => theme.COLORS.DARK_200};
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1.2rem;
+
+        #Svg {
+            width: 2.4rem;
+            height: 2.2rem;
+
+            background: none;
+            border: none;
+
+            position: absolute;
+            right: 1.6rem;
+            top: 1.6rem;
+
+        }
+
+        #ImageMeal {
+            width: 8.8rem;
+            height: 8.8rem;
+
+            border-radius: 50%;
+        }
+
+        h1 {
+            width: 19.0rem;
+            font-family: "Poppins", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            line-height: 2.4rem;
+            text-align: center;
+        }
+
+        #Price {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: 1.6rem;
+            color: ${({ theme }) => theme.COLORS.CAKE_200};
+
+            text-align: center;
+        }
+
+        #Button {
+            width: 16.2rem;
+            padding: 5px 0 4px 0;
+        }
+    }
     
     section {
         display: flex;
@@ -73,7 +132,7 @@ export const Main = styled.div`
 
         font-family: "Poppins", sans-serif;
         font-size: 1.4rem;
-        color: ${({theme}) => theme.COLORS.LIGHT_300};
+        color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
         #Carousel {
             display: flex;

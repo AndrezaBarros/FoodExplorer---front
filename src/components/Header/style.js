@@ -29,6 +29,12 @@ export const Container = styled.div`
                 font-weight: bold;
                 font-size: 2.1rem;
             }
+
+            #Admin {
+                font-size: 1.4rem;
+                font-weight: 100;
+                color: ${({ theme }) => theme.COLORS.CAKE_200};
+            }
         }
     }
 

@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { Container } from "./style";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { Header } from "../../components/Header";
@@ -8,11 +8,11 @@ import { Input } from "../../components/Input";
 import { Footer } from "../../components/Footer";
 import { useAuth } from "../../hooks/auth";
 import { ButtonText } from "../../components/ButtonText";
-import { api } from "../../services/api";
 
-export function Menu() {
+// eslint-disable-next-line no-unused-vars
+export function Menu({ search, setSearch }) {
   const { signOut } = useAuth();
-  const [menuItem, setMenuItem] = useState();
+  const { type } = JSON.parse(localStorage.getItem("@foodExplorer:user"));
   const navigateTo = useNavigate();
 
   function handleSignOut() {
@@ -21,15 +21,6 @@ export function Menu() {
     navigateTo(-1);
   }
 
-  useEffect(() => {
-    async function fetchUserType() {
-      const userType = await api.get("users");
-      setMenuItem(userType);
-    }
-
-    fetchUserType();
-  }, []);
-
   return (
     <Container>
       <Header mode={false} />
@@ -37,16 +28,25 @@ export function Menu() {
         <Input
           icon={IoSearchOutline}
           placeholder="Busque por pratos ou ingredientes"
+          onChange={(e) => setSearch(e.target.value)}
         />
         <section id="Links">
-          {menuItem == "cliente" ? (
+          {type != "Restaurant" ? (
             <div>
-              <ButtonText title="Sair" onClick={handleSignOut} id="ButtonText"/>
+              <ButtonText
+                title="Sair"
+                onClick={handleSignOut}
+                id="ButtonText"
+              />
             </div>
           ) : (
             <div>
-              <ButtonText title="Novo Prato" id="ButtonText" to="/editMeal"/>
-              <ButtonText title="Sair" onClick={handleSignOut} id="ButtonText"/>
+              <ButtonText title="Novo Prato" id="ButtonText" to="/formMeal" />
+              <ButtonText
+                title="Sair"
+                onClick={handleSignOut}
+                id="ButtonText"
+              />
             </div>
           )}
         </section>
