@@ -22,8 +22,12 @@ export const Main = styled.div`
     }
 
     #Meal {
-        width: 26.4rem;
-        height: 26.4rem;
+        clip-path: circle(50% at center);
+        -webkit-clip-path: circle(50% at center);
+        img {
+            width: 26.4rem;
+            height: 26.4rem;
+        }
     }
 
     h1 {
@@ -61,7 +65,7 @@ export const Main = styled.div`
         span {
             width: fit-content;
             height: 3.2rem;
-            background-color: ${({theme}) => theme.COLORS.DARK_1000};
+            background-color: ${({ theme }) => theme.COLORS.DARK_1000};
             border-radius: 0.5rem;
             padding: 0.4rem 0.8rem;
 
@@ -72,13 +76,15 @@ export const Main = styled.div`
     }
 
     #Order {
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 1.6rem;
 
-        #Button {
+        #Button {       
             font-size: 0.9rem;
         }
+
     }
 
 `;

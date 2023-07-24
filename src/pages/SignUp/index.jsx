@@ -19,6 +19,10 @@ export function SignUp() {
       return alert("Por favor preencher todos os campos");
     }
 
+    if (password < 6) {
+      return alert("A senha deve conter 6 ou mais caracteres")
+    }
+
     navigateTo("/userType");
 
     localStorage.setItem("@foodExplorer:name", name);

@@ -5,8 +5,8 @@ import { useState } from "react";
 import Add from "../../assets/svg/Plus.svg";
 import Decrement from "../../assets/svg/Minus.svg";
 
-export function Counter({ id, mealsUnity, setMealsUnity }) {
-  const [unity, setUnity] = useState(0);
+export function Counter({ id, mealsUnity, setMealsUnity, initialValue, price, setOrderValue}) {
+  const [unity, setUnity] = useState(initialValue || 0);
 
   function onClickPlus() {
     let mealUnity = mealsUnity.find((x) => x.id == id);
@@ -15,6 +15,7 @@ export function Counter({ id, mealsUnity, setMealsUnity }) {
       mealUnity.unity++;
 
       setUnity(mealUnity.unity);
+      setOrderValue(price * mealUnity.unity);
     } else {
       mealsUnity.push({ id: id, unity: 1 });
       setUnity(1);
@@ -31,6 +32,7 @@ export function Counter({ id, mealsUnity, setMealsUnity }) {
 
       setUnity(mealUnity.unity);
       setMealsUnity(mealsUnity);
+      setOrderValue(price * mealUnity.unity);
     }
   }
 

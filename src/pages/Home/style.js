@@ -81,6 +81,7 @@ export const Main = styled.div`
         flex-direction: column;
         gap: 1.2rem;
 
+
         #Svg {
             width: 2.4rem;
             height: 2.2rem;
@@ -91,9 +92,8 @@ export const Main = styled.div`
             position: absolute;
             right: 1.6rem;
             top: 1.6rem;
-
         }
-
+        
         #ImageMeal {
             width: 8.8rem;
             height: 8.8rem;

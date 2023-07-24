@@ -9,8 +9,8 @@ import { Menu } from "../pages/Menu";
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/detailsMeal" element={<DetailsMeal/>} />
-      <Route path="/formMeal" element={<FormMeal/>} />
+      <Route path="/detailsMeal/:id" element={<DetailsMeal/>} />
+      <Route path="/formMeal/:id" element={<FormMeal/>} />
       <Route path="/favorites" element={<Favorites/>} />
       <Route path="/" element={<Home/>} />
       <Route path="/Menu" element={<Menu/>} />

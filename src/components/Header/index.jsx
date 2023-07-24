@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Container, Order } from "./style";
+import { useNavigate } from "react-router-dom";
 
 import { ButtonText } from "../ButtonText";
 import PolygonLogo from "../../assets/svg/Polygon 2.svg";
@@ -7,7 +8,9 @@ import Receipt from "../../assets/svg/Receipt.svg";
 import Menu from "../../assets/svg/Menu.svg";
 import Close from "../../assets/svg/Close.svg";
 
-export function Header({ mode, userType }) {
+export function Header({ mode, userType, cartUnity }) {
+  const navigateTo = useNavigate();
+
   return (
     <Container>
       {mode ? (
@@ -16,15 +19,15 @@ export function Header({ mode, userType }) {
 
           <section id="logo">
             <img src={PolygonLogo} alt="logo" />
-            <span>food explorer</span>
-            {userType == "Client" ? null : <span id="Admin">admin</span>}
+            <span onClick={() => navigateTo("/")}>food explorer</span>
+            {userType == "Restaurant" ? <span id="Admin">admin</span> : null }
           </section>
 
-          {userType == "Client" ? (
+          {userType != "Restaurant" ? (
             <Order>
               <img src={Receipt} alt="receipt" />
               <label>
-                <button>0</button>
+                <button>{cartUnity != undefined ? cartUnity.length : 0}</button>
                 <input id="order" type="file" />
               </label>
             </Order>

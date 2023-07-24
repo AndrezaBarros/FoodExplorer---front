@@ -18,11 +18,16 @@ import imagePlaceholder from "../../assets/imageMeal/Mask group.png";
 
 export function Home() {
   const [meals, setMeals] = useState([]);
-  const [search, setSearch] = useState("");
   const [mealsUnity, setMealsUnity] = useState([]);
+  const [cart, setCart] = useState([]);
 
   const navigateTo = useNavigate();
   const { type } = JSON.parse(localStorage.getItem("@foodExplorer:user"));
+
+  async function handleFavoriteFood(meal_id) {
+    await api.post("/favorite_foods", { meal_id });
+    alert("Prato adicionado aos favoritos")
+  }
 
   function handleImage(image) {
     const mealImageUrl = image
@@ -32,22 +37,31 @@ export function Home() {
     return mealImageUrl;
   }
 
-  function handleMealDetails(mealId) {
-    navigateTo(`formMeal/${mealId}`);
+  function handleMealDetails(id) {
+    navigateTo(`/detailsMeal/${id}`);
   }
+
+  function handleEditMeal(id) {
+    navigateTo(`/formMeal/${id}`);
+  }
+
+  function handleAddMealToCart(meal) {
+    setCart((cart) => [...cart, meal]);
+  } 
 
   useEffect(() => {
     async function fetchMeals() {
-      const response = await api.get(`/meals?name=${search}`);
+      const response = await api.get(`/meals?name=${SearchBar.search}`);
       setMeals(response.data);
     }
+
     fetchMeals();
-  }, [search]);
+  }, [SearchBar.search]);
 
   return (
     <Container>
-      <Header mode={true} id="Header" userType={type} />
-      <Main search={search} setSearch={setSearch}>
+      <Header mode={true} id="Header" userType={type} cartUnity={cart} />
+      <Main>
         <div id="Banner">
           <img src={Macarrons} alt="Macarrons" />
           <h2>Sabores inigualáveis</h2>
@@ -58,13 +72,15 @@ export function Home() {
           <h3>Refeições</h3>
           <div id="Carousel">
             {meals &&
-              meals.map((meal) =>
+              meals.filter((meal) => meal.category == "meal").map((meal) =>
                 type == "Client" ? (
                   <div id="Meal" key={String(meal.id)}>
-                    <button id="Svg">
-                      <img src={Heart} onClick={() => handleMealDetails(meal.id)}/>
+                    <button id="Svg" type="button" onClick={() => handleFavoriteFood(meal.id)}>
+                      <img src={Heart} />
                     </button>
-                    <img src={handleImage(meal.image)} id="ImageMeal" />
+                    <div onClick={() => handleMealDetails(meal.id)}>
+                      <img src={handleImage(meal.image)} id="ImageMeal" />
+                    </div>
                     <h1>{meal.name}</h1>
                     <span id="Price">{"R$ " + meal.price}</span>
                     <Counter
@@ -72,14 +88,16 @@ export function Home() {
                       mealsUnity={mealsUnity}
                       setMealsUnity={setMealsUnity}
                     />
-                    <Button title="Incluir" id="Button" />
+                    <Button title="Incluir" id="Button" onClick={() => handleAddMealToCart(meal)} />
                   </div>
                 ) : (
                   <div id="Meal" key={String(meal.id)}>
-                    <button id="Svg">
+                    <button id="Svg" type="button" onClick={() => handleEditMeal(meal.id)}>
                       <img src={Pencil} />
                     </button>
-                    <img src={handleImage(meal.image)} id="ImageMeal" />
+                    <div onClick={() => handleMealDetails(meal.id)}>
+                      <img src={handleImage(meal.image)} id="ImageMeal" />
+                    </div>
                     <h1>{meal.name}</h1>
                     <span id="Price">{"R$ " + meal.price}</span>
                   </div>
@@ -92,10 +110,10 @@ export function Home() {
           <h3>Pratos principais</h3>
           <div id="Carousel">
             {meals &&
-              meals.map((meal) =>
+              meals.filter((meal) => meal.category == "dessert").map((meal) =>
                 type == "Client" ? (
                   <div id="Meal" key={String(meal.id)}>
-                    <button id="Svg">
+                    <button id="Svg" type="button" onClick={() => handleFavoriteFood(meal.id)}>
                       <img src={Heart} />
                     </button>
                     <img src={handleImage(meal.image)} id="ImageMeal" />
@@ -106,14 +124,52 @@ export function Home() {
                       mealsUnity={mealsUnity}
                       setMealsUnity={setMealsUnity}
                     />
-                    <Button title="Incluir" id="Button" />
+                    <Button title="Incluir" id="Button" onClick={() => handleAddMealToCart(meal)} />
                   </div>
                 ) : (
                   <div id="Meal" key={String(meal.id)}>
-                    <button id="Svg">
+                    <button id="Svg" type="button" onClick={() => handleEditMeal(meal.id)}>
                       <img src={Pencil} />
                     </button>
+                    <div onClick={() => handleMealDetails(meal.id)}>
+                      <img src={handleImage(meal.image)} id="ImageMeal" />
+                    </div>
+                    <h1>{meal.name}</h1>
+                    <span id="Price">{"R$ " + meal.price}</span>
+                  </div>
+                )
+              )}
+          </div>
+        </section>
+
+        <section>
+          <h3>Pratos principais</h3>
+          <div id="Carousel">
+            {meals &&
+              meals.filter((meal) => meal.category == "drink").map((meal) =>
+                type == "Client" ? (
+                  <div id="Meal" key={String(meal.id)}>
+                    <button id="Svg" type="button" onClick={() => handleFavoriteFood(meal.id)}>
+                      <img src={Heart} />
+                    </button>
                     <img src={handleImage(meal.image)} id="ImageMeal" />
+                    <h1>{meal.name}</h1>
+                    <span id="Price">{"R$ " + meal.price}</span>
+                    <Counter
+                      id={meal.id}
+                      mealsUnity={mealsUnity}
+                      setMealsUnity={setMealsUnity}
+                    />
+                    <Button title="Incluir" id="Button" onClick={() => handleAddMealToCart(meal)} />
+                  </div>
+                ) : (
+                  <div id="Meal" key={String(meal.id)}>
+                    <button id="Svg" type="button" onClick={() => handleEditMeal(meal.id)}>
+                      <img src={Pencil} />
+                    </button>
+                    <div onClick={() => handleMealDetails(meal.id)}>
+                      <img src={handleImage(meal.image)} id="ImageMeal" />
+                    </div>
                     <h1>{meal.name}</h1>
                     <span id="Price">{"R$ " + meal.price}</span>
                   </div>
@@ -125,4 +181,7 @@ export function Home() {
       <Footer />
     </Container>
   );
+}
+export class SearchBar {
+  static search = "";
 }

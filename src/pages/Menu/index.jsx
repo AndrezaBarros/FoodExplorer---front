@@ -8,9 +8,11 @@ import { Input } from "../../components/Input";
 import { Footer } from "../../components/Footer";
 import { useAuth } from "../../hooks/auth";
 import { ButtonText } from "../../components/ButtonText";
+import { SearchBar } from "../Home";
 
 // eslint-disable-next-line no-unused-vars
-export function Menu({ search, setSearch }) {
+export function Menu() {
+  const search = SearchBar.search
   const { signOut } = useAuth();
   const { type } = JSON.parse(localStorage.getItem("@foodExplorer:user"));
   const navigateTo = useNavigate();
@@ -21,6 +23,12 @@ export function Menu({ search, setSearch }) {
     navigateTo(-1);
   }
 
+  function handleSearch(event) {
+    SearchBar.search = event.target.value
+
+    console.log(SearchBar.search)
+  }
+
   return (
     <Container>
       <Header mode={false} />
@@ -28,11 +36,16 @@ export function Menu({ search, setSearch }) {
         <Input
           icon={IoSearchOutline}
           placeholder="Busque por pratos ou ingredientes"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => handleSearch(e)}
         />
         <section id="Links">
           {type != "Restaurant" ? (
             <div>
+              <ButtonText
+                title="Meus Favoritos"
+                id="ButtonText"
+                to="/favorites"
+              />
               <ButtonText
                 title="Sair"
                 onClick={handleSignOut}
@@ -41,10 +54,11 @@ export function Menu({ search, setSearch }) {
             </div>
           ) : (
             <div>
-              <ButtonText title="Novo Prato" id="ButtonText" to="/formMeal" />
+              <ButtonText title="Novo Prato" id="ButtonText" to="/formMeal/-1" />
               <ButtonText
                 title="Sair"
                 onClick={handleSignOut}
+                type="button"
                 id="ButtonText"
               />
             </div>
