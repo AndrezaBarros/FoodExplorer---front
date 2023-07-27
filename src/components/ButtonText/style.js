@@ -11,4 +11,11 @@ export const Container = styled(Link)`
     font-family: "Poppins", serif;
     font-size: 2.4rem;
     color: ${({theme}) => theme.COLORS.LIGHT_100};
+
+    :hover {
+        transition: transform 400ms;
+        transform: scale(1.03);
+        opacity: 1;
+        cursor: pointer;
+    }
 `;

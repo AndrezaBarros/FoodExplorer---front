@@ -1,10 +1,10 @@
 import { Container } from "./style.js";
 
 // eslint-disable-next-line react/prop-types
-export function Input({ icon: Icon, ...rest }) {
+export function Input({ img, ...rest }) {
   return (
     <Container>
-      {Icon && <Icon size={20} />}
+      <img src={img}/>
       <input {...rest} />
     </Container>
   );

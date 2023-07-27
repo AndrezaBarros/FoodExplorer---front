@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form } from "./style";
+import { ContainerMobile, FormMobile, ContainerDesktop, FormDesktop } from "./style";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 import Polygon from "../../assets/svg/Polygon 2.svg";
 import { Input } from "../../components/Input";
@@ -13,6 +14,7 @@ export function SignUp() {
   const [password, setPassword] = useState("");
 
   const navigateTo = useNavigate();
+  const desktopWidth = useMediaQuery("only screen and (min-width : 1368px)");
 
   function handleSignUp() {
     if (!name || !email || !password) {
@@ -31,40 +33,87 @@ export function SignUp() {
 
   }
 
+  if (!desktopWidth) {
+    return (
+      <ContainerMobile>
+        <section id="logo">
+          <img src={Polygon} alt="Logo" />
+          <h1>food explorer</h1>
+        </section>
+
+        <FormMobile>
+          <span>Seu nome</span>
+          <Input
+            placeholder="Exemplo: Maria da Silva"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </FormMobile>
+
+        <FormMobile>
+          <span>Email</span>
+          <Input
+            placeholder="Exemplo: exemplo@exemplo.com.br"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FormMobile>
+
+        <FormMobile>
+          <span>Senha</span>
+          <Input
+            placeholder="No mínimo 6 caracteres"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FormMobile>
+
+        <Button title="Criar conta" onClick={handleSignUp} />
+
+        <ButtonText title="Já tenho uma conta" to="/" id="ButtonText" />
+      </ContainerMobile>
+    );
+  }
+
   return (
-    <Container>
+    <ContainerDesktop>
       <section id="logo">
         <img src={Polygon} alt="Logo" />
         <h1>food explorer</h1>
       </section>
 
-      <Form>
-        <span>Seu nome</span>
-        <Input
-          placeholder="Exemplo: Maria da Silva"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Form>
+      <div>
+        <h2>Crie sua conta</h2>
+        <FormDesktop>
+          <span>Seu nome</span>
+          <Input
+            placeholder="Exemplo: Maria da Silva"
+            onChange={(e) => setEmail(e.target.value)}
+            id="Input"
+          />
+        </FormDesktop>
 
-      <Form>
-        <span>Email</span>
-        <Input
-          placeholder="Exemplo: exemplo@exemplo.com.br"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form>
+        <FormDesktop>
+          <span>Email</span>
+          <Input
+            placeholder="Exemplo: exemplo@exemplo.com.br"
+            onChange={(e) => setEmail(e.target.value)}
+            id="Input"
+          />
+        </FormDesktop>
 
-      <Form>
-        <span>Senha</span>
-        <Input
-          placeholder="No mínimo 6 caracteres"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Form>
+        <FormDesktop>
+          <span>Senha</span>
+          <Input
+            placeholder="No mínimo 6 caracteres"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            id="Input"
+          />
+        </FormDesktop>
 
-      <Button title="Criar conta" onClick={handleSignUp} />
+        <Button title="Entrar" onClick={handleSignUp} id="Button" />
 
-      <ButtonText title="Já tenho uma conta" to="/" id="ButtonText"/>
-    </Container>
-  );
+        <ButtonText title="Já tenho uma conta" id="ButtonText" to="/" />
+      </div>
+    </ContainerDesktop>
+  )
+
 }

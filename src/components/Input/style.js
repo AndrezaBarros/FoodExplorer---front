@@ -8,7 +8,6 @@ export const Container = styled.div`
 
     display: flex;
     align-items: center;
-    gap: 1.5rem;
     
     background-color: ${({ theme }) => theme.COLORS.DARK_900};
 

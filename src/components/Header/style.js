@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ContainerMobile = styled.div`
     width: 100vw;
     height: 11.4rem;
 
@@ -20,6 +20,13 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         gap: 0.8rem;
+
+            :hover {
+                transition: transform 400ms;
+                transform: scale(1.1);
+                opacity: 1;
+                cursor: pointer;
+            }
         
             > img {
                 width: 2.5rem;
@@ -53,7 +60,7 @@ export const Container = styled.div`
     }
 `;
 
-export const Order = styled.div`
+export const OrderMobile = styled.div`
     position: relative;
     width: 3.7rem;
 
@@ -97,4 +104,90 @@ export const Order = styled.div`
         }
     }
 
+`;
+
+export const ContainerDesktop = styled.div`
+    width: 100vw;
+
+    background-color: ${({ theme }) => theme.COLORS.DARK_700};
+
+    padding: 2.8rem 12.3rem;
+
+    #Main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            img {
+                width: 3.0rem;
+            }
+
+            span {
+                width: 14.6rem;
+                font-family: "Roboto", sans-serif;
+                font-weight: 700;
+                font-size: 2.4rem;
+
+                position: relative;
+            }
+
+            #Admin {
+                position: absolute;
+                left: 26.5rem;
+                top: 6.5rem;
+
+                font-family: "Roboto", sans-serif;
+                font-size: 1.4rem;
+                color: ${({ theme }) => theme.COLORS.CAKE_200};
+            }
+            
+        }
+
+        div {
+            position: relative;
+
+            img {
+                position: absolute;
+                top: 1.2rem;
+                left: 15.5rem;
+
+                width: 2.4rem;
+                height: 2.4rem;
+            }
+
+            #Input {
+                width: 58.1rem;
+                height: 4.8rem;
+                padding: 1.2rem 1.4rem;
+                border-radius: 0.8rem;
+                border: none;
+                
+                display: flex;
+                align-items: center;
+                text-align: center;
+                
+                background-color: ${({ theme }) => theme.COLORS.DARK_900};
+                color: ${({ theme }) => theme.COLORS.LIGHT_100};;
+            }
+        }
+
+        #divButtonText {
+            width: 10.8rem;
+
+            #Favorites {
+                font-family: "Roboto", sans-serif;
+                font-size: 1.6rem;
+            }
+        }
+        
+
+        #Button {
+            max-width: 21.6rem;
+        }
+    }
 `;

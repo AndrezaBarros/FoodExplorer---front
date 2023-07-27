@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ContainerMobile = styled.div`
 width: 100vw;
     height: 100vh;
 
@@ -10,6 +10,9 @@ width: 100vw;
     flex-direction: column;
     align-items: center;
     gap: 3.2rem;
+
+    animation-name: leftrigth;
+    animation-duration: 900ms;
 
     #logo {
         width: 100%;
@@ -34,9 +37,20 @@ width: 100vw;
     #ButtonText {
         font-size: 1.4rem;
     }
+
+    @keyframes leftrigth {
+        0% {
+            opacity: 0;
+            transform: translateX(-15px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
 `;
 
-export const Form = styled.div`
+export const FormMobile = styled.div`
     width: 100%;
 
     display: flex;
@@ -48,4 +62,69 @@ export const Form = styled.div`
     font-weight: 400;
 
     color: ${({theme}) => theme.COLORS.LIGHT_400};
+`;
+
+export const ContainerDesktop = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    padding: 14.2rem 10.8rem;
+    justify-content: space-between;
+    align-items: center;
+
+    #logo {
+        display: flex;
+        align-items: center;
+        gap: 1.9rem;
+
+        >img {
+            width: 4.9rem;
+        }
+
+        >h1 {
+            font-family: "Roboto", sans-serif;
+            font-size: 4.2rem;
+        }
+    }
+
+    > div {
+        padding: 6.4rem;
+        background-color: ${({theme}) => theme.COLORS.DARK_700};
+
+        display: flex;
+        flex-direction: column;
+        gap: 3.2rem;
+        align-items: center;
+
+        border-radius: 1.6rem;
+
+        h2 {
+           font-family: "Poppins", sans-serif;
+           font-size: 3.2rem;
+           font-weight: 500;
+
+           text-align: center;
+        }
+
+        #ButtonText {
+            font-size: 1.4rem;
+        }
+    }
+`;
+
+export const FormDesktop = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    span {
+        font-family: "Roboto", sans-serif;
+        font-size: 1.6rem;
+
+        margin-bottom: 0.8rem;
+    }
+
+    #Input {
+        width: 34.8rem;
+    }
 `;

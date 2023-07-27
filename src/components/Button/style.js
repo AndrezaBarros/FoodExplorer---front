@@ -26,4 +26,10 @@ export const Container = styled.button`
         width: 2.2rem;
         height: 2.2rem;
     }
+
+    :hover {
+        transition: transform 400ms;
+        transform: scale(1.1);
+        opacity: 1;
+    }
 `;

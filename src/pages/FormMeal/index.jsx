@@ -1,6 +1,7 @@
-import { Container, Main } from "./style";
+import { Container, MainMobile, MainDesktop } from "./style";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 import CaretLeft from "../../assets/svg/CaretLeft.svg";
 import Upload from "../../assets/svg/Upload.svg";
@@ -27,9 +28,10 @@ export function FormMeal() {
   const fileUploadForm = new FormData();
   const navigateTo = useNavigate();
   const params = useParams(null);
+  const desktopWidth = useMediaQuery("only screen and (min-width : 1368px)");
 
   function handleAddIngredient() {
-    ingredients.push({ name: newIngredient })
+    ingredients.push({name: newIngredient})
     setIngredients(ingredients);
     setNewIngredient("");
   }
@@ -89,7 +91,7 @@ export function FormMeal() {
     fileUploadForm.append("image", image);
 
     api
-      .put(`/meals/${id}`, {
+      .put(`/meals/${params.id}`, {
         name: mealName,
         category,
         ingredients,
@@ -138,78 +140,280 @@ export function FormMeal() {
 
   }, []);
 
+  if (!desktopWidth) {
+    if (params.id != -1) {
+      return data &&
+        <Container>
+          <Header id="Header" mode={true} />
+          <MainMobile>
+            <ButtonText title="voltar" img={CaretLeft} id="ButtonText" to="/" />
+
+            <h1>Editar prato</h1>
+
+            <form>
+              <label>Imagem do prato</label>
+              <div id="UploadImage">
+                <img src={Upload} alt="Upload" />
+                <span>
+                  {!data.image ? "Selecione imagem" : "Imagem selecionada"}
+                </span>
+                <input type="file" onChange={handleInsertMealImage} />
+              </div>
+
+              <label>Nome</label>
+              <input
+                className="Input"
+                value={mealName}
+                onChange={(e) => setMealName(e.target.value)}
+                id="Name"
+              />
+
+              <label>Categoria</label>
+              <select
+                name="select"
+                id="Select"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="meal">Refeição</option>
+                <option value="dessert">Sobremesa</option>
+                <option value="drink">Bebida</option>
+              </select>
+
+              <label>Ingredientes</label>
+              <section id="Ingredients">
+                {
+                  ingredients.map((ingredient, index) => (
+                    <div key={String(index)}>
+                      <input type="text" value={ingredient.name} readOnly />
+                      <button onClick={() => handleRemoveIngredient(index)} type="button">
+                        <img src={Close} alt="close" />
+                      </button>
+                    </div>
+                  ))}
+
+                <div className="outlined">
+                  <input
+                    type="text"
+                    placeholder="Adicionar"
+                    value={newIngredient}
+                    onChange={(e) => setNewIngredient(e.target.value)}
+                  />
+                  <button type="button" onClick={handleAddIngredient}>
+                    <img src={Plus} alt="Plus" />
+                  </button>
+                </div>
+              </section>
+
+              <label>Preço</label>
+              <input
+                className="Input"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                type="text"
+              />
+
+              <label>Descrição</label>
+              <textarea
+                name="description"
+                id="Description"
+                cols="45"
+                rows="8"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+
+              <div id="Submits">
+                <Button id="ButtonRemove" title="Excluir prato" onClick={() => handleDeleteMeal(params.id)} />
+                <Button title="Salvar Alterações" onClick={() => handleUpdateMeal(data.id)} />
+              </div>
+            </form>
+          </MainMobile>
+          <Footer />
+        </Container>
+    } else {
+      return (
+        <Container>
+          <Header id="Header" mode={true} />
+          <MainMobile>
+            <ButtonText title="voltar" img={CaretLeft} id="ButtonText" to="/" />
+
+            <h1>Novo prato</h1>
+
+            <form>
+              <label>Imagem do prato</label>
+              <div id="UploadImage">
+                <img src={Upload} alt="Upload" />
+                <span>
+                  {!image ? "Selecione imagem" : "Imagem selecionada"}
+                </span>
+                <input type="file" onChange={handleInsertMealImage} />
+              </div>
+
+              <label>Nome</label>
+              <input
+                className="Input"
+                placeholder="Ex.: Salada Ceasar"
+                onChange={(e) => setMealName(e.target.value)}
+                id="Name"
+              />
+
+              <label>Categoria</label>
+              <select
+                name="select"
+                id="Select"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="meal">Refeição</option>
+                <option value="dessert">Sobremesa</option>
+                <option value="drink">Bebida</option>
+              </select>
+
+              <label>Ingredientes</label>
+              <section id="Ingredients">
+                {ingredients &&
+                  ingredients.map((ingredient, index) => (
+                    <div key={String(index)}>
+                      <input type="text" value={ingredient} readOnly />
+                      <button onClick={() => handleRemoveIngredient(ingredient)}>
+                        <img src={Close} alt="close" />
+                      </button>
+                    </div>
+                  ))}
+
+                <div className="outlined">
+                  <input
+                    type="text"
+                    placeholder="Adicionar"
+                    value={newIngredient}
+                    onChange={(e) => setNewIngredient(e.target.value)}
+                  />
+                  <button type="button" onClick={handleAddIngredient}>
+                    <img src={Plus} alt="Plus" />
+                  </button>
+                </div>
+              </section>
+
+              <label>Preço</label>
+              <input
+                className="Input"
+                placeholder="R$ 00,00"
+                onChange={(e) => setPrice(e.target.value)}
+                type="text"
+              />
+
+              <label>Descrição</label>
+              <textarea
+                name="description"
+                id="Description"
+                cols="45"
+                rows="8"
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
+              ></textarea>
+
+              <div id="Submits">
+                <Button title="Salvar Alterações" onClick={handleNewMeal} />
+              </div>
+            </form>
+          </MainMobile>
+          <Footer />
+        </Container>
+      );
+    }
+  }
+
   if (params.id != -1) {
-    return data &&
+    return data && 
       <Container>
         <Header id="Header" mode={true} />
-        <Main>
+        <MainDesktop>
           <ButtonText title="voltar" img={CaretLeft} id="ButtonText" to="/" />
 
           <h1>Editar prato</h1>
 
           <form>
-            <label>Imagem do prato</label>
-            <div id="UploadImage">
-              <img src={Upload} alt="Upload" />
-              <span>
-                {!data.image ? "Selecione imagem" : "Imagem selecionada"}
-              </span>
-              <input type="file" onChange={handleInsertMealImage} />
-            </div>
+            <section id="Line1">
+              <div>
+                <label>Imagem do prato</label>
+                <div id="UploadImage">
+                  <img src={Upload} alt="Upload" />
+                  <span>
+                    {!data.image ? "Selecione imagem" : "Imagem selecionada"}
+                  </span>
+                  <input type="file" onChange={handleInsertMealImage} />
+                </div>
+              </div>
 
-            <label>Nome</label>
-            <input
-              className="Input"
-              value={mealName}
-              onChange={(e) => setMealName(e.target.value)}
-              id="Name"
-            />
-
-            <label>Categoria</label>
-            <select
-              name="select"
-              id="Select"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="meal">Refeição</option>
-              <option value="dessert">Sobremesa</option>
-              <option value="drink">Bebida</option>
-            </select>
-
-            <label>Ingredientes</label>
-            <section id="Ingredients">
-              {
-                ingredients.map((ingredient, index) => (
-                  <div key={String(index)}>
-                    <input type="text" value={ingredient.name} readOnly />
-                    <button onClick={() => handleRemoveIngredient(index)} type="button">
-                      <img src={Close} alt="close" />
-                    </button>
-                  </div>
-                ))}
-
-              <div className="outlined">
+              <div>
+                <label>Nome</label>
                 <input
-                  type="text"
-                  placeholder="Adicionar"
-                  value={newIngredient}
-                  onChange={(e) => setNewIngredient(e.target.value)}
+                  className="Input"
+                  value={mealName}
+                  placeholder="Ex.: Salada Ceasar"
+                  onChange={(e) => setMealName(e.target.value)}
+                  id="Name"
                 />
-                <button type="button" onClick={handleAddIngredient}>
-                  <img src={Plus} alt="Plus" />
-                </button>
+              </div>
+
+              <div>
+                <label>Categoria</label>
+                <select
+                  name="select"
+                  id="Select"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="meal">Refeição</option>
+                  <option value="dessert">Sobremesa</option>
+                  <option value="drink">Bebida</option>
+                </select>
               </div>
             </section>
 
-            <label>Preço</label>
-            <input
-              className="Input"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              type="text"
-            />
+            <section id="Line2">
+              <div>
+                <label>Ingredientes</label>
+                <section id="Ingredients">
+                  {
+                    ingredients.map((ingredient, index) => (
+                      <div key={String(index)}>
+                        <input type="text" value={ingredient.name} readOnly />
+                        <button onClick={() => handleRemoveIngredient(ingredient)}>
+                          <img src={Close} alt="close" />
+                        </button>
+                      </div>
+                    ))}
+
+                  <div className="outlined">
+                    <input
+                      type="text"
+                      placeholder="Adicionar"
+                      value={newIngredient}
+                      onChange={(e) => setNewIngredient(e.target.value)}
+                    />
+                    <button type="button" onClick={handleAddIngredient}>
+                      <img src={Plus} alt="Plus" />
+                    </button>
+                  </div>
+                </section>
+              </div>
+
+              <div>
+                <label>Preço</label>
+                <input
+                  className="Input"
+                  placeholder="R$ 00,00"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  id="Price"
+                  type="text"
+                />
+              </div>
+            </section>
 
             <label>Descrição</label>
             <textarea
@@ -219,87 +423,102 @@ export function FormMeal() {
               rows="8"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
             ></textarea>
 
             <div id="Submits">
               <Button id="ButtonRemove" title="Excluir prato" onClick={() => handleDeleteMeal(params.id)} />
-              <Button title="Salvar Alterações" onClick={() => handleUpdateMeal(data.id)} />
+              <Button title="Salvar Alterações" onClick={handleUpdateMeal} id="ButtonSave" />
             </div>
           </form>
-        </Main>
+        </MainDesktop>
         <Footer />
       </Container>
   } else {
     return (
       <Container>
         <Header id="Header" mode={true} />
-        <Main>
+        <MainDesktop>
           <ButtonText title="voltar" img={CaretLeft} id="ButtonText" to="/" />
 
-          <h1>Novo prato</h1>
-
+          <h1>Adicionar prato</h1>
           <form>
-            <label>Imagem do prato</label>
-            <div id="UploadImage">
-              <img src={Upload} alt="Upload" />
-              <span>
-                {!image ? "Selecione imagem" : "Imagem selecionada"}
-              </span>
-              <input type="file" onChange={handleInsertMealImage} />
-            </div>
+            <section id="Line1">
+              <div>
+                <label>Imagem do prato</label>
+                <div id="UploadImage">
+                  <img src={Upload} alt="Upload" />
+                  <span>
+                    {!image ? "Selecione imagem" : "Imagem selecionada"}
+                  </span>
+                  <input type="file" onChange={handleInsertMealImage} />
+                </div>
+              </div>
 
-            <label>Nome</label>
-            <input
-              className="Input"
-              placeholder="Ex.: Salada Ceasar"
-              onChange={(e) => setMealName(e.target.value)}
-              id="Name"
-            />
-
-            <label>Categoria</label>
-            <select
-              name="select"
-              id="Select"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="meal">Refeição</option>
-              <option value="dessert">Sobremesa</option>
-              <option value="drink">Bebida</option>
-            </select>
-
-            <label>Ingredientes</label>
-            <section id="Ingredients">
-              {ingredients &&
-                ingredients.map((ingredient, index) => (
-                  <div key={String(index)}>
-                    <input type="text" value={ingredient} readOnly />
-                    <button onClick={() => handleRemoveIngredient(ingredient)}>
-                      <img src={Close} alt="close" />
-                    </button>
-                  </div>
-                ))}
-
-              <div className="outlined">
+              <div>
+                <label>Nome</label>
                 <input
-                  type="text"
-                  placeholder="Adicionar"
-                  value={newIngredient}
-                  onChange={(e) => setNewIngredient(e.target.value)}
+                  className="Input"
+                  placeholder="Ex.: Salada Ceasar"
+                  onChange={(e) => setMealName(e.target.value)}
+                  id="Name"
                 />
-                <button type="button" onClick={handleAddIngredient}>
-                  <img src={Plus} alt="Plus" />
-                </button>
+              </div>
+
+              <div>
+                <label>Categoria</label>
+                <select
+                  name="select"
+                  id="Select"
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="meal">Refeição</option>
+                  <option value="dessert">Sobremesa</option>
+                  <option value="drink">Bebida</option>
+                </select>
               </div>
             </section>
 
-            <label>Preço</label>
-            <input
-              className="Input"
-              placeholder="R$ 00,00"
-              onChange={(e) => setPrice(e.target.value)}
-              type="text"
-            />
+            <section id="Line2">
+              <div>
+                <label>Ingredientes</label>
+                <section id="Ingredients">
+                  {ingredients &&
+                    ingredients.map((ingredient, index) => (
+                      <div key={String(index)}>
+                        <input type="text" value={ingredient.name} readOnly />
+                        <button onClick={() => handleRemoveIngredient(ingredient)}>
+                          <img src={Close} alt="close" />
+                        </button>
+                      </div>
+                    ))}
+
+                  <div className="outlined">
+                    <input
+                      type="text"
+                      placeholder="Adicionar"
+                      value={newIngredient}
+                      onChange={(e) => setNewIngredient(e.target.value)}
+                    />
+                    <button type="button" onClick={handleAddIngredient}>
+                      <img src={Plus} alt="Plus" />
+                    </button>
+                  </div>
+                </section>
+              </div>
+
+              <div>
+                <label>Preço</label>
+                <input
+                  className="Input"
+                  placeholder="R$ 00,00"
+                  onChange={(e) => setPrice(e.target.value)}
+                  id="Price"
+                  type="text"
+                />
+              </div>
+            </section>
 
             <label>Descrição</label>
             <textarea
@@ -312,12 +531,13 @@ export function FormMeal() {
             ></textarea>
 
             <div id="Submits">
-              <Button title="Salvar Alterações" onClick={handleNewMeal} />
+              <Button title="Salvar Alterações" onClick={handleNewMeal} id="ButtonSave" />
             </div>
           </form>
-        </Main>
+        </MainDesktop>
         <Footer />
       </Container>
     );
   }
+
 }

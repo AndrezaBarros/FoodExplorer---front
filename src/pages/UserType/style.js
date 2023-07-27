@@ -10,6 +10,9 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 8rem;
+
+    animation-name: leftrigth;
+    animation-duration: 900ms;
     
     #Logo {
         display: flex;
@@ -53,4 +56,14 @@ export const Container = styled.div`
         background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
     }
 
+    @keyframes leftrigth {
+        0% {
+            opacity: 0;
+            transform: translateX(-15px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
 `;

@@ -9,6 +9,7 @@ import { Footer } from "../../components/Footer";
 import { useAuth } from "../../hooks/auth";
 import { ButtonText } from "../../components/ButtonText";
 import { SearchBar } from "../Home";
+import Search from "../../assets/svg/search.svg";
 
 // eslint-disable-next-line no-unused-vars
 export function Menu() {
@@ -25,8 +26,6 @@ export function Menu() {
 
   function handleSearch(event) {
     SearchBar.search = event.target.value
-
-    console.log(SearchBar.search)
   }
 
   return (
@@ -34,7 +33,7 @@ export function Menu() {
       <Header mode={false} />
       <main id="Main">
         <Input
-          icon={IoSearchOutline}
+          img={Search}
           placeholder="Busque por pratos ou ingredientes"
           onChange={(e) => handleSearch(e)}
         />
