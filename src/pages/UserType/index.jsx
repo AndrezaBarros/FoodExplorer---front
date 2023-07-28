@@ -9,12 +9,14 @@ import Restaurant from "../../assets/svg/Restaurant.svg";
 import { Button } from "../../components/Button";
 
 import { api } from "../../services/api";
+import Loading from "../../assets/svg/Loading.svg";
 
 export function UserType() {
   const [userType, setUserType] = useState();
   const name = localStorage.getItem("@foodExplorer:name");
   const email = localStorage.getItem("@foodExplorer:email");
   const password = localStorage.getItem("@foodExplorer:password");
+  const [loading, setLoading] = useState(false);
 
   const desktopWidth = useMediaQuery("only screen and (min-width : 1368px)");
   const navigateTo = useNavigate();
@@ -33,6 +35,8 @@ export function UserType() {
     if (!userType) {
       return alert("Por favor escolha um tipo de usuário");
     }
+
+    setLoading(true);
 
     api
       .post("/users", { name, email, password, type: userType })
@@ -94,7 +98,11 @@ export function UserType() {
         </button>
       </div>
 
-      <Button title="Finalizar conta" onClick={handleFinishRegister} id="Button"/>
+      {loading == false ? 
+        <Button title="Finalizar conta" onClick={handleFinishRegister} id="Button"/>
+        :
+        <img src={Loading} alt="" />
+      }
     </ContainerDesktop>
   );
 }

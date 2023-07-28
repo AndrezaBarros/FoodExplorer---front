@@ -134,6 +134,10 @@ export const ContainerDesktop = styled.div`
         width: 40%;
     }
 
+    img {
+        width: 5rem;
+    }
+
     @keyframes leftrigth {
         0% {
             opacity: 0;
