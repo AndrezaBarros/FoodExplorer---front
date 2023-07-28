@@ -85,7 +85,7 @@ export function SignUp() {
           <span>Seu nome</span>
           <Input
             placeholder="Exemplo: Maria da Silva"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             id="Input"
           />
         </FormDesktop>
@@ -109,7 +109,7 @@ export function SignUp() {
           />
         </FormDesktop>
 
-        <Button title="Entrar" onClick={handleSignUp} id="Button" />
+        <Button title="Criar conta" onClick={handleSignUp} id="Button" />
 
         <ButtonText title="Já tenho uma conta" id="ButtonText" to="/" />
       </div>
