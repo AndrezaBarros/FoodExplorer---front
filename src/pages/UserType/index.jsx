@@ -1,6 +1,7 @@
-import { Container } from "./style";
+import { ContainerMobile, ContainerDesktop } from "./style";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 import Polygon from "../../assets/svg/Polygon 2.svg";
 import Person from "../../assets/svg/Person.svg";
@@ -15,6 +16,7 @@ export function UserType() {
   const email = localStorage.getItem("@foodExplorer:email");
   const password = localStorage.getItem("@foodExplorer:password");
 
+  const desktopWidth = useMediaQuery("only screen and (min-width : 1368px)");
   const navigateTo = useNavigate();
 
   function onClickPerson() {
@@ -52,23 +54,47 @@ export function UserType() {
       });
   }
 
+  if (!desktopWidth) {
+    return (
+      <ContainerMobile>
+        <section id="Logo">
+          <img src={Polygon} alt="Polygon" />
+          <h1>food explorer</h1>
+        </section>
+
+        <button id="UserType" onClick={onClickPerson}>
+          <img src={Person} alt="Person" />
+          <h2>Sou um cliente</h2>
+        </button>
+        <button id="UserType" onClick={onClickRestaurant}>
+          <img src={Restaurant} alt="Restaurant" />
+          <h2>Sou um restaurante</h2>
+        </button>
+
+        <Button title="Finalizar conta" onClick={handleFinishRegister} />
+      </ContainerMobile>
+    );
+  }
+
   return (
-    <Container>
+    <ContainerDesktop>
       <section id="Logo">
         <img src={Polygon} alt="Polygon" />
         <h1>food explorer</h1>
       </section>
 
-      <button id="UserType" onClick={onClickPerson}>
-        <img src={Person} alt="Person" />
-        <h2>Sou um cliente</h2>
-      </button>
-      <button id="UserType" onClick={onClickRestaurant}>
-        <img src={Restaurant} alt="Restaurant" />
-        <h2>Sou um restaurante</h2>
-      </button>
+      <div>
+        <button id="UserType" onClick={onClickPerson}>
+          <img src={Person} alt="Person" />
+          <h2>Sou um cliente</h2>
+        </button>
+        <button id="UserType" onClick={onClickRestaurant}>
+          <img src={Restaurant} alt="Restaurant" />
+          <h2>Sou um restaurante</h2>
+        </button>
+      </div>
 
-      <Button title="Finalizar conta" onClick={handleFinishRegister}/>
-    </Container>
+      <Button title="Finalizar conta" onClick={handleFinishRegister} id="Button"/>
+    </ContainerDesktop>
   );
 }
