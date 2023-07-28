@@ -218,8 +218,8 @@ export function FormMeal() {
               <textarea
                 name="description"
                 id="Description"
-                cols="45"
-                rows="8"
+                cols="20"
+                rows="5"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
@@ -308,8 +308,8 @@ export function FormMeal() {
               <textarea
                 name="description"
                 id="Description"
-                cols="45"
-                rows="8"
+                cols="20"
+                rows="5"
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
               ></textarea>
@@ -419,8 +419,8 @@ export function FormMeal() {
             <textarea
               name="description"
               id="Description"
-              cols="45"
-              rows="8"
+              cols="20"
+              rows="5"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
@@ -524,8 +524,8 @@ export function FormMeal() {
             <textarea
               name="description"
               id="Description"
-              cols="45"
-              rows="8"
+              cols="20"
+              rows="5"
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
             ></textarea>

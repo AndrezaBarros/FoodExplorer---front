@@ -313,8 +313,16 @@ export const MainDesktop = styled.div`
                 }
 
                 p {
+                    
+                    width: 100%;
+                    height: 4.4rem;
+                    flex-wrap: wrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                
                     font-family: "Roboto", sans-serif;
                     font-size: 1.4rem;
+                    text-align: center;
                 }
 
                 #Price {
